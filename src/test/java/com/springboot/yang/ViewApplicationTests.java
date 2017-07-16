@@ -1,4 +1,4 @@
-package com.springboot.view;
+package com.springboot.yang;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

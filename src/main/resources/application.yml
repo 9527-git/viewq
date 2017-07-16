@@ -1,5 +1,14 @@
 server:
   port: 80
 spring:
- resources:
+  resources:
    static-locations: classpath:/static/,classpath:/templates/,classpath:/views/
+  datasource:
+           type: com.alibaba.druid.pool.DruidDataSource
+           driverClassName: com.mysql.jdbc.Driver
+           url: jdbc:mysql://localhost:3306/renren_fastplus?useUnicode=true&characterEncoding=UTF-8
+           username: root
+           password: 123456
+# Mybatis≈‰÷√
+mybatis:
+    mapperLocations: classpath:mapper/*.xml

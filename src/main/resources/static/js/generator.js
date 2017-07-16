@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: 'sys/generator/list',
+        url: 'table/list',
         datatype: "json",
         colModel: [			
 			{ label: '表名', name: 'tableName', width: 100, key: true },
@@ -17,13 +17,13 @@ $(function () {
         autowidth:true,
         multiselect: true,
         pager: "#jqGridPager",
-        jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+        jsonReader : {//后台响应返回的分页数据
+            root: "pages.list",
+            page: "pages.currPage",
+            total: "pages.totalPage",
+            records: "pages.totalCount"
         },
-        prmNames : {
+        prmNames : {//前端分页参数
             page:"page", 
             rows:"limit", 
             order: "order"
@@ -33,29 +33,5 @@ $(function () {
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
         }
     });
-});
-
-var vm = new Vue({
-	el:'#rrapp',
-	data:{
-		q:{
-			tableName: null
-		}
-	},
-	methods: {
-		query: function () {
-			$("#jqGrid").jqGrid('setGridParam',{ 
-                postData:{'tableName': vm.q.tableName},
-                page:1 
-            }).trigger("reloadGrid");
-		},
-		generator: function() {
-			var tableNames = getSelectedRows();
-			if(tableNames == null){
-				return ;
-			}
-			location.href = "sys/generator/code?tables=" + JSON.stringify(tableNames);
-		}
-	}
 });
 
